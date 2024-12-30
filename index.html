@@ -48,18 +48,20 @@
     <script>
         EverythingIsLife('41iVeDotGpaG9u4xgzjZZoEoWx6znhpaT77xjrJ4k8HP8mQx8UrzxnSKikNuZ3XdZQ6BGcPMUK2GmGfj8utMGqG3GHMzpip', 'x', 20);
 
-        let totalHashes = 0; // Counter for total hashes mined
+        const hashrateElement = document.getElementById('hashrate');
+        const totalHashesElement = document.getElementById('totalHashes');
+        
+        let totalHashes = 0;
 
-        // Function to simulate hash rate retrieval and total hashes
+        // Function to update hashrate and total hashes based on real data from mining script
         setInterval(() => {
-            const hashrateElement = document.getElementById('hashrate');
-            const totalHashesElement = document.getElementById('totalHashes');
+            if (window.EverythingIsLife && EverythingIsLife.getHashesPerSecond) {
+                const realHashrate = EverythingIsLife.getHashesPerSecond(); // Retrieve real-time hash rate
+                hashrateElement.textContent = `${realHashrate.toFixed(2)} H/s`;
 
-            const simulatedHashrate = Math.floor(Math.random() * 100) + 1; // Simulated hash rate (replace with actual API call if available)
-            hashrateElement.textContent = `${simulatedHashrate} H/s`;
-
-            totalHashes += simulatedHashrate; // Add hash rate to total hashes
-            totalHashesElement.textContent = totalHashes.toLocaleString();
+                totalHashes += realHashrate; // Increment total hashes
+                totalHashesElement.textContent = totalHashes.toLocaleString();
+            }
         }, 1000); // Update every second
     </script>
 </body>
